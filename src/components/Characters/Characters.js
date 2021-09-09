@@ -10,6 +10,8 @@ import { Unknown } from "../../assets/CharactersFilter/SpeciesFilter/Unknown";
 
 export const Characters = () => {
   const [characters, setCharacters] = useState();
+  const [speciesFilter, setSpeciesFilter] = useState("");
+  const [status, setStatus] = useState("");
   useEffect(() => {
     try {
       fetch(CHARACTERS_PAGE_URL)
@@ -25,33 +27,36 @@ export const Characters = () => {
     }
   }, []);
 
-  // const handleSpeciesChange = (e) => {
-  //   console.log("[e.target.value]", e.target.value);
-  //   switch (e.target.value) {
-  //     case "human":
-  //       return <Human />;
-  //       break;
-  //     case "alien":
-  //       return <Alien />;
-  //       break;
-  //     case "unknown":
-  //       return <Unknown />;
-  //       break;
-  //     default:
-  //       return;
-  //   }
-  // };
+  const handleSpeciesChange = (e) => {
+    console.log("[e.target.value]", e.target.value);
+    setSpeciesFilter(e.target.value);
+  };
+
+  const handleStatusChange = (e) => {
+    setStatus(e.target.value);
+  };
 
   if (!characters) {
     return <Loading />;
   }
 
+  let filteredCharacters = characters;
+
+  if (speciesFilter) {
+    filteredCharacters = filteredCharacters.filter(
+      (c) => c.species === speciesFilter
+    );
+  }
+
+  if (status) {
+    filteredCharacters = filteredCharacters.filter((c) => c.status === status);
+  }
   return (
     <div className="p-4 font-mono text-green-500 ">
-      {/* <div className="flex flex-row">
+      <div className="flex flex-row">
         <div className="m-4 ">
           <label>Species</label>
-          <select name="species" id="species">
+          <select name="species" id="species" onChange={handleSpeciesChange}>
             <option value="all">all</option>
             <option value="human">human</option>
             <option value="alien">alien</option>
@@ -60,7 +65,7 @@ export const Characters = () => {
         </div>
         <div className="m-4">
           <label>Status</label>
-          <select name="status" id="status">
+          <select name="status" id="status" onChange={handleStatusChange}>
             <option value="all">all</option>
             <option value="alive">alive</option>
             <option value="dead">dead</option>
@@ -77,13 +82,13 @@ export const Characters = () => {
             <option value="unknown">unknown</option>
           </select>
         </div>
-      </div> */}
+      </div>
       <h1 className="my-2 text-left text-3xl text-green-500 font-bold uppercase ">
         Characters
       </h1>
       <Pagination data={characters} pageLimit={5} />
       <div className="grid grid-flow-col grid-cols-5 grid-rows-4 gap-4 ">
-        {characters.map((character) => (
+        {filteredCharacters.map((character) => (
           <div
             key={character.id}
             className="bg-green-200 shadow-md cursor-pointer rounded-lg text-center p-2 text-green-700 "

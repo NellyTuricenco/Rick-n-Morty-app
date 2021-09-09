@@ -1,6 +1,6 @@
 export const Home = () => {
   return (
-    <div className="h-screen flex flex-col">
+    <div className="h-full flex flex-col overflow-hidden">
       <div
         className=" flex items-center justify-center h-full bg-contain  bg-center  bg-no-repeat animate-wiggle duration-400"
         style={{

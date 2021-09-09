@@ -35,28 +35,39 @@ export const CharacterDetails = ({ match }) => {
   } = characterDetails;
 
   return (
-    <div>
-      <Link to="/characters">Back</Link>
+    <div className="p-6">
+      <Link
+        to="/characters"
+        className="text-green-500 text-base underline mb-0.5"
+      >
+        Back
+      </Link>
       <div>
-        <h2>Name: {name}</h2>
-        <div>
-          <img alt={name} src={image}></img>
-        </div>
-        <div>
-          <ul>
-            <li>Gender:{gender}</li>
-            <li>Species:{species}</li>
-            <li>Type:{type}</li>
-            <li>Origin:{origin.name}</li>
-            <li>
-              Location:
-              <Link to={`/locations/${location.url.split("/").pop()}`}>
-                {location.name}
-              </Link>
-            </li>
-            <li>Status:{status}</li>
-            <li>Created:{created}</li>
-          </ul>
+        <h2 className="text-2xl text-green-500 font-bold">Name: {name}</h2>
+        <div className="flex flex-row mt-4 ">
+          <div>
+            <img
+              alt={name}
+              src={image}
+              className="mr-6 border rounded-full"
+            ></img>
+          </div>
+          <div className="grid-flow-row">
+            <ul className="text-green-700 text-base font-bold">
+              <li>Gender: {gender}</li>
+              <li>Species: {species}</li>
+              <li>Type: {type}</li>
+              <li>Origin: {origin.name}</li>
+              <li>
+                Location:
+                <Link to={`/locations/${location.url.split("/").pop()}`}>
+                  {location.name}
+                </Link>
+              </li>
+              <li>Status: {status}</li>
+              <li>Created: {created}</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
