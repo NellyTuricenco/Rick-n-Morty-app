@@ -1,7 +1,11 @@
 export const Pagination = (props) => {
+  // страница, которая отображается в данный момент, активная, по умолчанию указываем в props, что равна 1
   const currentPage = props.currentPage;
+  // кол-во номеров страниц, которые отображаются
   const pages = props.pages;
+  // обработчик события клик на номере страницы
   const clickHandler = props.clickHandler;
+  // массив номеров страниц с персонажами
   let pageNumbers = [];
 
   for (let i = 1; i <= pages; i++) {
@@ -20,6 +24,7 @@ export const Pagination = (props) => {
     );
   }
 
+  // переключение на Previous и Next не срабатывает :(
   const goToNextPage = () => currentPage + 1;
 
   const goToPreviousPage = () => currentPage - 1;
@@ -29,6 +34,7 @@ export const Pagination = (props) => {
       <ul className="pagination pagination-sm  m-4">
         <li className="page-item">
           <a
+            // класс "disabled" не применяется хотя у нас даже по умолчанию currentPage = 1.
             className={`page-link ${currentPage === 1 ? "disabled" : ""}`}
             aria-label="Previous"
             onClick={goToPreviousPage}
