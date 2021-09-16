@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { HUMAN_SPECIES_URL } from "../../../api/rickNMortyApi";
+import { HUMAN_SPECIES_URL } from "../../../api/rickNMortyApiConst";
 
 export const Human = ({ match }) => {
   const { species } = match.params;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { UNKNOWN_SPECIES_URL } from "../../../api/rickNMortyApi";
+import { UNKNOWN_SPECIES_URL } from "../../../api/rickNMortyApiConst";
 
 export const Unknown = ({ match }) => {
   const { species } = match.params;
